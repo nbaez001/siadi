@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rmovimientos_sr1" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="820" leftMargin="11" rightMargin="11" topMargin="0" bottomMargin="0" uuid="f7e301cc-1e7b-47c2-9a93-a68a4f1d5d19">
+	<property name="ireport.zoom" value="5.559917313492334"/>
+	<property name="ireport.x" value="886"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idProducto" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="anio" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="mes0" class="java.lang.Integer"/>
+	<parameter name="mes1" class="java.lang.Integer"/>
+	<parameter name="mes2" class="java.lang.Integer"/>
+	<parameter name="mes3" class="java.lang.Integer"/>
+	<parameter name="fecha0" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha1" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha2" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha3" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha4" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+p.codigo as codigo,
+p.nombre as nombre,
+(select um.nombre from Tablamaestra um where um.id=p.idtunidadmedida) as um,
+(select iim.cantidad
+from inventarioiniciomes iim
+inner join producto p2 on p2.id=iim.idProducto
+where p2.id=$P{idProducto} and iim.anio=$P{anio} and iim.mes=$P{mes0}
+) as salini0,
+(select sum(dc.cantidad) from detallecompra dc
+inner join producto p3 on p3.id=dc.idProducto
+inner join compra c1 on c1.id=dc.idcompra
+where p3.id=$P{idProducto} and c1.idtestadocompra=22 and (c1.fechaalmacenamiento>=$P{fecha0} and fechaalmacenamiento<$P{fecha1})
+) as ingreso0,
+(select sum(dv.cantidad) from detalleventa dv
+inner join producto p4 on p4.id=dv.idProducto
+inner join venta v1 on v1.id=dv.idventa
+where p4.id=$P{idProducto} and v1.idtestadoventa=24 and (v1.fechasalida>=$P{fecha0} and fechasalida<$P{fecha1})
+) as egreso0,
+(select iim.cantidad
+from inventarioiniciomes iim
+inner join producto p2 on p2.id=iim.idProducto
+where p2.id=$P{idProducto} and iim.anio=$P{anio} and iim.mes=$P{mes1}
+) as salini1,
+(select sum(dc.cantidad) from detallecompra dc
+inner join producto p3 on p3.id=dc.idProducto
+inner join compra c1 on c1.id=dc.idcompra
+where p3.id=$P{idProducto} and c1.idtestadocompra=22 and (c1.fechaalmacenamiento>=$P{fecha1} and fechaalmacenamiento<$P{fecha2})
+) as ingreso1,
+(select sum(dv.cantidad) from detalleventa dv
+inner join producto p4 on p4.id=dv.idProducto
+inner join venta v1 on v1.id=dv.idventa
+where p4.id=$P{idProducto} and v1.idtestadoventa=24 and (v1.fechasalida>=$P{fecha1} and fechasalida<$P{fecha2})
+) as egreso1,
+(select iim.cantidad
+from inventarioiniciomes iim
+inner join producto p2 on p2.id=iim.idProducto
+where p2.id=$P{idProducto} and iim.anio=$P{anio} and iim.mes=$P{mes2}
+) as salini2,
+(select sum(dc.cantidad) from detallecompra dc
+inner join producto p3 on p3.id=dc.idProducto
+inner join compra c1 on c1.id=dc.idcompra
+where p3.id=$P{idProducto} and c1.idtestadocompra=22 and (c1.fechaalmacenamiento>=$P{fecha2} and fechaalmacenamiento<$P{fecha3})
+) as ingreso2,
+(select sum(dv.cantidad) from detalleventa dv
+inner join producto p4 on p4.id=dv.idProducto
+inner join venta v1 on v1.id=dv.idventa
+where p4.id=$P{idProducto} and v1.idtestadoventa=24 and (v1.fechasalida>=$P{fecha2} and fechasalida<$P{fecha3})
+) as egreso2,
+(select iim.cantidad
+from inventarioiniciomes iim
+inner join producto p2 on p2.id=iim.idProducto
+where p2.id=$P{idProducto} and iim.anio=$P{anio} and iim.mes=$P{mes3}
+) as salini3,
+(select sum(dc.cantidad) from detallecompra dc
+inner join producto p3 on p3.id=dc.idProducto
+inner join compra c1 on c1.id=dc.idcompra
+where p3.id=$P{idProducto} and c1.idtestadocompra=22 and (c1.fechaalmacenamiento>=$P{fecha3} and fechaalmacenamiento<$P{fecha4})
+) as ingreso3,
+(select sum(dv.cantidad) from detalleventa dv
+inner join producto p4 on p4.id=dv.idProducto
+inner join venta v1 on v1.id=dv.idventa
+where p4.id=$P{idProducto} and v1.idtestadoventa=24 and (v1.fechasalida>=$P{fecha3} and fechasalida<$P{fecha4})
+) as egreso3
+FROM producto p
+WHERE p.id = $P{idProducto}]]>
+	</queryString>
+	<field name="codigo" class="java.lang.String"/>
+	<field name="nombre" class="java.lang.String"/>
+	<field name="um" class="java.lang.String"/>
+	<field name="salini0" class="java.lang.Double"/>
+	<field name="ingreso0" class="java.lang.Double"/>
+	<field name="egreso0" class="java.lang.Double"/>
+	<field name="salini1" class="java.lang.Double"/>
+	<field name="ingreso1" class="java.lang.Double"/>
+	<field name="egreso1" class="java.lang.Double"/>
+	<field name="salini2" class="java.lang.Double"/>
+	<field name="ingreso2" class="java.lang.Double"/>
+	<field name="egreso2" class="java.lang.Double"/>
+	<field name="salini3" class="java.lang.Double"/>
+	<field name="ingreso3" class="java.lang.Double"/>
+	<field name="egreso3" class="java.lang.Double"/>
+	<variable name="variable1" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[]]></variableExpression>
+		<initialValueExpression><![CDATA[]]></initialValueExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band splitType="Stretch"/>
+	</title>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="11">
+			<rectangle>
+				<reportElement uuid="93742d2c-1f99-45d5-95cd-5816ad4e7352" x="783" y="-1" width="37" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="306ae780-17aa-4511-a21c-e580fb1c173f" x="746" y="-1" width="37" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="5fe6bf67-3fa5-410e-a864-1510e020f337" x="673" y="-1" width="36" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="b57d3cab-45e0-4b7c-8e97-24aacb7e23e3" x="636" y="-1" width="37" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="07cdb8fe-054b-4245-a744-d5c175a30abc" x="599" y="-1" width="37" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="08c4478c-c174-4a74-8bec-dba49bd94d99" x="525" y="-1" width="37" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="3d97bded-f88e-49dc-874d-e25f68b36f8e" x="489" y="-1" width="36" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="c8ea7805-b1a4-4bbd-823e-92a38fee34cc" x="452" y="-1" width="37" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="4b6b4ba5-4b5e-4e53-8ad5-cdb53a2cdeee" x="380" y="-1" width="35" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="99ae70d0-7a3c-411d-b972-1a4e0a580dbe" x="190" y="-1" width="42" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="3f91e4cc-f93b-4e8f-98e6-83a139bd6aaf" x="43" y="-1" width="147" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="7d73e07d-c3b1-4378-bac1-6d274e2ef1e8" x="306" y="-1" width="37" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="55aeada8-583b-4d1e-a8ec-bc3af298f720" x="269" y="-1" width="37" height="12"/>
+			</rectangle>
+			<rectangle>
+				<reportElement uuid="7df9da89-0106-45c5-968f-a62a6e4a6a7c" x="0" y="-1" width="43" height="12"/>
+			</rectangle>
+			<textField pattern="###0">
+				<reportElement uuid="b87527c1-d4a5-4ba7-9e3e-222cde2087c4" x="1" y="0" width="41" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigo}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="1d9cd86c-3b1a-416e-b622-e637d7869096" x="232" y="-1" width="37" height="12"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="3c5fc2ae-4db1-4a6a-86f4-30a862425302" x="233" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{salini0}==null)?"-":$F{salini0}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="cb21df13-3948-4933-bec4-c8b55f122acb" x="270" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ingreso0}==null)?"-":$F{ingreso0}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement uuid="96e4fae5-333a-4f47-be66-e00ad13a8409" x="307" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{egreso0}==null)?"-":$F{egreso0}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="94217ce0-6f2e-43b8-9a09-87851a137262" x="343" y="-1" width="37" height="12"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="false">
+				<reportElement uuid="9ee52313-7e57-41ec-b899-fb204f394996" x="344" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{salini0}==null)?"-":(($F{ingreso0}==null)?(($F{egreso0}==null)?$F{salini0}:($F{salini0}-$F{egreso0})):(($F{egreso0}==null)?($F{salini0}+$F{ingreso0}):($F{salini0}+$F{ingreso0}-$F{egreso0})))]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement uuid="8be7a4b2-cb43-4fef-bee8-20a10c363a70" x="47" y="0" width="143" height="11"/>
+				<textElement textAlignment="Left">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{nombre}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0">
+				<reportElement uuid="58bec1ea-f47d-4198-bfe9-0ed9caaa3e60" x="191" y="0" width="40" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{um}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="1375860a-34c0-4073-aa53-64a81a218a44" x="453" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{egreso1}==null)?"-":$F{egreso1}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="c8e393b4-d72d-4393-91c3-1745f99cb15a" x="415" y="-1" width="37" height="12"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="eee8b04c-7a7a-4df5-a179-f3f934104a73" x="381" y="0" width="34" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{salini1}==null)?"-":$F{salini1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="4db2ef75-4a37-4bf9-86ea-292865af22b9" x="490" y="0" width="35" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{salini1}==null)?"-":(($F{ingreso1}==null)?(($F{egreso1}==null)?$F{salini1}:($F{salini1}-$F{egreso1})):(($F{egreso1}==null)?($F{salini1}+$F{ingreso1}):($F{salini1}+$F{ingreso1}-$F{egreso1})))]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="5f23f46a-30ab-4983-a7d4-80429127dc3d" x="416" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ingreso1}==null)?"-":$F{ingreso1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="97ada043-5100-4a44-a528-3abb86778d78" x="600" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{egreso2}==null)?"-":$F{egreso2}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="89a4e4d5-d7b1-4eb4-94ab-7320a42c3209" x="562" y="-1" width="37" height="12"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="2ae20047-3277-4a79-8260-17fa989ce69b" x="526" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{salini2}==null)?"-":$F{salini2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="a24e2020-4859-479f-9f0c-9bf206417a6b" x="637" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{salini2}==null)?"-":(($F{ingreso2}==null)?(($F{egreso2}==null)?$F{salini2}:($F{salini2}-$F{egreso2})):(($F{egreso2}==null)?($F{salini2}+$F{ingreso2}):($F{salini2}+$F{ingreso2}-$F{egreso2})))]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="c67ebecc-5914-4bba-9ae5-b439f374d416" x="563" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ingreso2}==null)?"-":$F{ingreso2}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="952c71ca-7513-4997-9208-498c4c751d19" x="747" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{egreso3}==null)?"-":$F{egreso3}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement uuid="7d74b31d-8530-457d-b25b-3c30394aae97" x="709" y="-1" width="37" height="12"/>
+			</rectangle>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="863c5dca-14b2-4cab-81a0-16ab65c39bdf" x="674" y="0" width="35" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{salini3}==null)?"-":$F{salini3}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="b9781b12-428d-487c-aeb1-0c03bb41610b" x="784" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{salini3}==null)?"-":(($F{ingreso3}==null)?(($F{egreso3}==null)?$F{salini3}:($F{salini3}-$F{egreso3})):(($F{egreso3}==null)?($F{salini3}+$F{ingreso3}):($F{salini3}+$F{ingreso3}-$F{egreso3})))]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0" isBlankWhenNull="true">
+				<reportElement uuid="a33387e1-358c-4793-b52b-0cc18ee6bbca" x="710" y="0" width="36" height="11"/>
+				<textElement textAlignment="Center">
+					<font size="7"/>
+				</textElement>
+				<textFieldExpression><![CDATA[($F{ingreso3}==null)?"-":$F{ingreso3}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

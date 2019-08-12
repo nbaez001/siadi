@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rkardex" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="58a2e48f-c640-4893-96c6-7801463e66a6">
+	<property name="ireport.zoom" value="1.1000000000000112"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="46"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:/Users/NERIO/Documents/NetBeansProjects/siadi030718/siadi/web/assets/report/"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="idCategoria" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+c.denominacion as dencategoria,
+c.id as idCategoria
+from
+categoria c
+where
+c.id = $P{idCategoria}]]>
+	</queryString>
+	<field name="dencategoria" class="java.lang.String"/>
+	<field name="idcategoria" class="java.lang.Integer"/>
+	<group name="Group1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+		<groupHeader>
+			<band height="24">
+				<frame>
+					<reportElement uuid="cf894523-4dd8-45dc-8c09-82732d58b72a" mode="Opaque" x="-21" y="0" width="842" height="24" forecolor="#B89F7D" backcolor="#F2EBDF"/>
+					<rectangle>
+						<reportElement uuid="30ac6b17-9a1d-47a9-88e5-a55249a1ce6f" mode="Opaque" x="21" y="0" width="36" height="24" backcolor="#736343"/>
+						<graphicElement>
+							<pen lineWidth="0.0"/>
+						</graphicElement>
+					</rectangle>
+					<textField>
+						<reportElement uuid="4d4ca427-ce03-4491-9744-1276dfa47f25" x="68" y="0" width="508" height="24"/>
+						<textElement verticalAlignment="Middle">
+							<font size="12" isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA["DETALLES DE INVENTARIO"]]></textFieldExpression>
+					</textField>
+				</frame>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band/>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<rectangle>
+					<reportElement uuid="ba15595c-7305-46c7-8531-7e9c6f558f10" x="703" y="0" width="99" height="15"/>
+				</rectangle>
+				<rectangle>
+					<reportElement uuid="1c0beac8-a47e-4598-ad51-079406bc08df" x="543" y="0" width="160" height="15"/>
+				</rectangle>
+				<rectangle>
+					<reportElement uuid="820a6bea-f408-4036-961b-a7b22f861c6b" x="383" y="0" width="160" height="15"/>
+				</rectangle>
+				<rectangle>
+					<reportElement uuid="421d0b25-a008-4159-8736-14d129405d17" x="200" y="0" width="183" height="15"/>
+				</rectangle>
+				<rectangle>
+					<reportElement uuid="a0044c3c-aeaa-4225-94af-e78c077c4ab7" x="22" y="0" width="178" height="15"/>
+				</rectangle>
+				<rectangle>
+					<reportElement uuid="deb7040b-32a9-47aa-b2b1-26b7f273a708" x="0" y="0" width="22" height="15"/>
+				</rectangle>
+				<staticText>
+					<reportElement uuid="0bdc699f-3831-4f5b-9c45-c8f70cb38c54" x="1" y="0" width="22" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[N°]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="6a17abf0-2b76-421c-addb-dafe5d568a17" x="25" y="0" width="175" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Fecha de ingreso]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="e7a28ffb-e0d9-4978-b922-15b4359bf904" x="203" y="0" width="180" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Ubicación en almacen]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="081eaf40-1c23-4370-a724-ef5fdfdc195e" x="387" y="0" width="156" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Precio por menor (S/.)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="28893b3d-f21b-4786-9460-7e7d5386e3b1" x="543" y="0" width="160" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Precio por mayor (S/.)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement uuid="27506c03-2a3a-4ea1-b864-6379608e7084" x="703" y="0" width="99" height="15"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Cantidad act.]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="138">
+			<image>
+				<reportElement uuid="61f13965-fe33-411d-b33b-8021f7e6cc2c" x="1" y="0" width="171" height="136"/>
+				<imageExpression><![CDATA["logo.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement uuid="32ae202b-fc7c-4441-bb59-50d5406a590a" x="172" y="0" width="502" height="94"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["REPORTE KARDEX DE LOS PRODUCTOS DE LA CATEGORIA '"+$F{dencategoria}+"'"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement uuid="1f5d8710-8a1c-43b0-86bc-5cfbb09daeb6" x="674" y="-101" width="267" height="209"/>
+				<imageExpression><![CDATA["mark.png"]]></imageExpression>
+			</image>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="18">
+			<subreport>
+				<reportElement uuid="da24732e-21cf-453a-8743-055903c0513c" x="-21" y="0" width="842" height="17"/>
+				<subreportParameter name="idCategoria">
+					<subreportParameterExpression><![CDATA[$F{idcategoria}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "rkardex_sr1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

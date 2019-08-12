@@ -1,0 +1,6 @@
+modificaciones 23-01-2019
+
+- Modificaciones de inventario
+	* si se desea modificar inventario, se deberia registrar dicho
+	  inventario como compras.
+	* la cual deberia tener una interfaz de registro tipo de compras.

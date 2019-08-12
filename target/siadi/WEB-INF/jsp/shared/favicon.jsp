@@ -1,0 +1,2 @@
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/assets/files/img/icono/icono.png">
+<link href="${pageContext.request.contextPath}/assets/css/nfonts/style.css" rel="stylesheet" type="text/css"/>

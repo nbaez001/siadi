@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rkardex_sr1" language="groovy" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="0" bottomMargin="0" uuid="58a2e48f-c640-4893-96c6-7801463e66a6">
+	<property name="ireport.zoom" value="1.4641000000000024"/>
+	<property name="ireport.x" value="163"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" fontName="Times New Roman" fontSize="50" isBold="true" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#736343" fontName="Arial" fontSize="18"/>
+	<style name="Column header" forecolor="#666666" fontName="Arial" fontSize="12" isBold="true"/>
+	<style name="Detail" fontName="Arial" fontSize="12"/>
+	<style name="Row" mode="Transparent">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style backcolor="#E6DAC3"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="idProducto" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[select
+i.id as id,
+p.codigo as codigop,
+p.nombre as nombrep,
+an.codigo as codigoand,
+al.nombre as nombrealm,
+i.cantidad as cantidad,
+i.preciomenmin as preciomenmin,
+i.preciomenmax as preciomenmax,
+i.preciomaymin as preciomaymin,
+i.preciomaymax as preciomaymax,
+i.fechusuariocrea as fechusuariocrea,
+(select u.nombre from tablamaestra u where u.id=p.idtunidadmedida) as unidadmedida
+from
+inventario i
+inner join producto p on p.id=i.idproducto
+inner join categoria c on c.id=p.idcategoria
+inner join andamio an on an.id=i.idandamio
+inner join almacen al on al.id=an.idalmacen
+where p.id = $P{idProducto} and i.estado = true]]>
+	</queryString>
+	<field name="id" class="java.lang.Integer"/>
+	<field name="codigop" class="java.lang.String"/>
+	<field name="nombrep" class="java.lang.String"/>
+	<field name="codigoand" class="java.lang.String"/>
+	<field name="nombrealm" class="java.lang.String"/>
+	<field name="cantidad" class="java.math.BigDecimal"/>
+	<field name="preciomenmin" class="java.math.BigDecimal"/>
+	<field name="preciomenmax" class="java.math.BigDecimal"/>
+	<field name="preciomaymin" class="java.math.BigDecimal"/>
+	<field name="preciomaymax" class="java.math.BigDecimal"/>
+	<field name="fechusuariocrea" class="java.sql.Date"/>
+	<field name="unidadmedida" class="java.lang.String"/>
+	<variable name="count" class="java.lang.Integer" calculation="Count">
+		<variableExpression><![CDATA[$F{id}]]></variableExpression>
+	</variable>
+	<variable name="sumcantidad" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{cantidad}]]></variableExpression>
+	</variable>
+	<group name="Group1">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/15)]]></groupExpression>
+		<groupHeader>
+			<band height="15">
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="e8164098-7c55-4a6b-b128-b5da6d69cdfa" x="23" y="0" width="779" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{nombrep}+" ("+$F{codigop}+")"]]></textFieldExpression>
+				</textField>
+				<textField isBlankWhenNull="true">
+					<reportElement uuid="ed2fc6ac-44ed-4fa7-9e3c-f3f66d148b21" x="0" y="0" width="23" height="15"/>
+					<textElement verticalAlignment="Middle">
+						<font size="9" isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA["ㄖ"]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="13">
+				<staticText>
+					<reportElement uuid="eae6032d-22cb-41e9-a5c4-88ab647bfd50" x="600" y="0" width="93" height="13"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle">
+						<font size="11" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Total:]]></text>
+				</staticText>
+				<textField pattern="###0.0" isBlankWhenNull="true">
+					<reportElement uuid="8d3d87cf-bb65-4584-adde-9da2ac0053aa" x="703" y="0" width="89" height="13"/>
+					<textElement textAlignment="Right" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{sumcantidad}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<group name="Group2">
+		<groupExpression><![CDATA[(int)($V{REPORT_COUNT}/5)]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="15">
+			<textField pattern="dd MMMMM yyyy">
+				<reportElement uuid="d274623a-b854-46bc-b00a-fd7cc2706967" x="26" y="0" width="175" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{fechusuariocrea}]]></textFieldExpression>
+			</textField>
+			<textField pattern="###0.0" isBlankWhenNull="true">
+				<reportElement uuid="a20855e6-e891-4061-93f7-7c633e78e58a" x="703" y="0" width="89" height="15"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cantidad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c570397c-40d5-4e61-b58a-f70916457569" x="2" y="0" width="23" height="15"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{count}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement uuid="b1803418-f292-46af-974e-1bc4451f4189" x="209" y="0" width="172" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{codigoand} +"  ~  " + $F{nombrealm}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="a2eb89d8-3e81-46c4-b00a-0a23897834d0" x="552" y="0" width="149" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{preciomaymin} +" ~  "+ $F{preciomaymax}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.00">
+				<reportElement uuid="a2eb89d8-3e81-46c4-b00a-0a23897834d0" x="391" y="0" width="150" height="15"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{preciomenmin} +" ~ "+ $F{preciomenmax}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>
