@@ -8,21 +8,28 @@ package com.romaqui.siadi.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.core.env.Environment;
 
 /**
  *
  * @author nerio
  */
+@PropertySource(value = { "classpath:application.properties" })
 public class ConectionUtil {
 
+    @Autowired
+    private Environment environment;
+    
     private Connection conexion = null;
     private String url = "";
 
     public ConectionUtil() {
         try {
-            Class.forName("org.postgresql.Driver");
-            url = "jdbc:postgresql://localhost:5432/siadi";
-            conexion = DriverManager.getConnection(url, "postgres", "1234");
+            Class.forName(environment.getRequiredProperty("jdbc.driverClassName"));
+            url = environment.getRequiredProperty("jdbc.url");
+            conexion = DriverManager.getConnection(url, environment.getRequiredProperty("jdbc.username"), environment.getRequiredProperty("jdbc.password"));
             System.out.println("Conexion a Base de Datos " + url + " . . . . .Ok");
         } catch (SQLException | ClassNotFoundException ex) {
             System.out.println(ex);
