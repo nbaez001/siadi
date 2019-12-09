@@ -211,6 +211,7 @@ angular.module('compraModule', ['ngValidate', 'dirPagination', 'components'])
                 s.calcularSubtotal = function (dc) {
                     dc.subtotal = (dc.cantidad * dc.preciounitario);
                     s.calcularTotal();
+                    s.calcularPerfecto(dc);
                 };
 
                 s.calcularTotal = function () {
@@ -719,6 +720,7 @@ angular.module('compraModule', ['ngValidate', 'dirPagination', 'components'])
                                         id: s.inventarios[i].id,
                                         producto: s.inventarios[i].producto,
                                         andamio: s.inventarios[i].andamio,
+                                        cantidad: s.inventarios[i].cantidad,
                                         preciomenmin: s.inventarios[i].preciomenmin,
                                         preciomenmax: s.inventarios[i].preciomenmax,
                                         preciomaymin: s.inventarios[i].preciomaymin,

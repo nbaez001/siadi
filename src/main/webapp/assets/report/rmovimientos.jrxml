@@ -16,7 +16,7 @@
 	<parameter name="fecha3" class="java.util.Date"/>
 	<parameter name="fecha4" class="java.util.Date"/>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:/Users/NERIO/Documents/NetBeansProjects/siadi030718/siadi/web/assets/report/"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:/Users/NERIO/Documents/NetBeansProjects/SIADI/siadi100819/siadi/src/main/webapp/assets/report/"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="titulo" class="java.lang.String"/>
 	<queryString>
@@ -291,11 +291,11 @@ FROM producto p]]>
 				<imageExpression><![CDATA["mark.png"]]></imageExpression>
 			</image>
 			<image>
-				<reportElement uuid="45e0603a-6778-4727-908c-81d7b2a49d48" x="1" y="0" width="166" height="110"/>
+				<reportElement uuid="45e0603a-6778-4727-908c-81d7b2a49d48" x="1" y="-12" width="254" height="99"/>
 				<imageExpression><![CDATA["logo.jpg"]]></imageExpression>
 			</image>
 			<textField>
-				<reportElement uuid="70f6b386-ac97-4be5-9169-083219fc2e1d" x="167" y="0" width="475" height="74"/>
+				<reportElement uuid="70f6b386-ac97-4be5-9169-083219fc2e1d" x="13" y="50" width="807" height="62"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="11" isBold="true" isItalic="false"/>
 				</textElement>

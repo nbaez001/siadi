@@ -307,7 +307,7 @@
                                                                 <a href="${pageContext.request.contextPath}{{compra.urlordencompra}}" target="_blank"><i class="fa fa-file-pdf-o"> Orden compr.</i></a>
                                                             </td>
                                                             <td>
-                                                                <a href="${pageContext.request.contextPath}/compra/rcompra?type=pdf&&id={{compra.id}}&&idtipoproveedor={{compra.proveedor.tipoproveedor.id}}" target="_blank" style="color: blueviolet"><i class="fa fa-file-pdf-o"> Rpt.</i></a>
+                                                                <a href="${pageContext.request.contextPath}/almacen/compra/rcompra?type=pdf&&id={{compra.id}}&&idtipoproveedor={{compra.proveedor.idttipoproveedor}}" target="_blank" style="color: blueviolet"><i class="fa fa-file-pdf-o"> Rpt.</i></a>
                                                             </td>
                                                             <td>
                                                                 <a ng-if="compra.idtestadocompra.iditem === 1" href="javascript:void(0)" ng-click="eliminarc(compra)" style="color: red"><i class="fa fa-close"> Del.</i></a>

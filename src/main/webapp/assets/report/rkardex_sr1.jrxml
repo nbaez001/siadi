@@ -17,7 +17,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["C:/Users/NERIO/Documents/NetBeansProjects/siadi030718/siadi/web/assets/report/"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["C:/Users/NERIO/Documents/NetBeansProjects/SIADI/siadi100819/siadi/src/main/webapp/assets/report/"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[select
@@ -39,7 +39,7 @@ where c.id = $P{idCategoria}]]>
 					<textElement verticalAlignment="Middle">
 						<font size="9" isBold="true"/>
 					</textElement>
-					<textFieldExpression><![CDATA[$F{dencategoria} ]]></textFieldExpression>
+					<textFieldExpression><![CDATA[$F{dencategoria}]]></textFieldExpression>
 				</textField>
 			</band>
 		</groupHeader>

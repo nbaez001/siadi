@@ -86,7 +86,7 @@ public class Compra implements java.io.Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechusuariocrea;
     
-    @Column(name = "idttipocliente", nullable = true)
+    @Column(name = "idusuariomod", nullable = true)
     private Integer idusuariomod;
     
     @Column(name = "fechusuariomod", nullable = true)
