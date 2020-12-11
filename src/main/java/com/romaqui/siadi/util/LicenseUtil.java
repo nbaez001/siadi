@@ -11,7 +11,7 @@ package com.romaqui.siadi.util;
  */
 public class LicenseUtil {
 
-    private static String fechaLimite = "2020/08/12";
+    private static String fechaLimite = "2021/12/31";
 
     public static String getFechaLimite() {
         return fechaLimite;
